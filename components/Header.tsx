@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export default function Header({ title }: { title: string }) {
+export default function Header({ title }: { title: string | undefined }) {
   return (
     <HeaderContainer>
       <h1>{title}</h1>

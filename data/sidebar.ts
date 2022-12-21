@@ -2,7 +2,7 @@ type mainTagIdentifier = 'developer' | 'mac' | 'hardware' | 'trending';
 type subTagIdentifier =
   | 'iTerm'
   | 'IDE'
-  | 'Browser'
+  | 'browser'
   | 'widget'
   | 'application'
   | 'system'
@@ -36,7 +36,7 @@ export const sidebar: sidebar[] = [
     'sub-tags': [
       { identifier: 'iTerm', present: 'iTerm' },
       { identifier: 'IDE', present: 'IDE' },
-      { identifier: 'Browser', present: '브라우저' },
+      { identifier: 'browser', present: '브라우저' },
     ],
   },
   {

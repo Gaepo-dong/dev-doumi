@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { sidebar } from '@/data/sidebar';
+import { MenuInfo } from 'rc-menu/lib/interface';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -28,17 +30,40 @@ const items: MenuItem[] = sidebar.map((item) => {
         item['main-tag'].identifier,
         null,
         item['sub-tags'].map((subItem) => {
-          return getItem(subItem.present, `${item['main-tag'].identifier}-${subItem.identifier}`);
+          return getItem(subItem.present, `${subItem.identifier}`);
         }),
       )
     : getItem(item['main-tag'].present, item['main-tag'].identifier);
 });
 
 export default function Sidebar() {
+  const router = useRouter();
+  const routerQuery = router.query.tag?.toString();
+
+  const onMenu = (e: MenuInfo) => {
+    router.push(`/category/${e.key.toString()}`);
+  };
+
+  // root
+  if (router.asPath === '/') {
+    return (
+      <Menu
+        defaultSelectedKeys={['trending']}
+        defaultOpenKeys={sidebar.map((item) => item['main-tag'].identifier)}
+        onClick={(e) => onMenu(e)}
+        mode='inline'
+        theme='light'
+        items={items}
+      />
+    );
+  }
+  // loading
+  if (!routerQuery) return null;
   return (
     <Menu
-      defaultSelectedKeys={['trending']}
+      defaultSelectedKeys={[routerQuery]}
       defaultOpenKeys={sidebar.map((item) => item['main-tag'].identifier)}
+      onClick={(e) => onMenu(e)}
       mode='inline'
       theme='light'
       items={items}
