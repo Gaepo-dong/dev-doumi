@@ -1,10 +1,21 @@
 import { readFileSync } from 'fs';
+import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import matter from 'gray-matter';
+import glob from 'glob';
 
-export const getPost = async () => {
-  const post = readFileSync('');
+import type { subTagIdentifier } from '@/@types';
 
-  const { data, content } = matter(post);
-  const {} = await serialize(content);
+const DIR_STRING = 'data/items';
+
+const POSTS_PATH = path.join(process.cwd(), DIR_STRING);
+
+export const getPostsByTag = async (tag: subTagIdentifier) => {
+  const { data, content } = matter('');
+  const mdxSource = await serialize(content);
+
+  return {
+    data,
+    mdxSource,
+  };
 };
