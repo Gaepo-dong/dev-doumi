@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.10.5",
+    "@mdx-js/react": "^2.2.1",
     "@next/font": "13.0.7",
     "@types/node": "18.11.17",
     "@types/react": "18.0.26",
@@ -17,8 +18,10 @@
     "antd": "^5.1.0",
     "eslint": "8.30.0",
     "eslint-config-next": "13.0.7",
+    "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "13.0.7",
+    "next-mdx-remote": "^4.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "recoil": "^0.7.6",
