@@ -1,8 +1,18 @@
 import Head from 'next/head';
+import type { GetStaticProps } from 'next';
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+
 import Header from '@/components/Header';
 import CustomLayout from '@/components/CustomLayout';
+import { getPostsByTag } from '@/utils/mdx';
+import type { FrontMatter } from '@/@types';
 
-export default function Home() {
+interface PageProps {
+  data: FrontMatter;
+  mdxSource: MDXRemoteSerializeResult;
+}
+
+export default function Home({}: PageProps) {
   return (
     <>
       <Head>
@@ -17,3 +27,13 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await getPostsByTag('Browser');
+
+  return {
+    props: {
+      ...data,
+    },
+  };
+};

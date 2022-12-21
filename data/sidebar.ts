@@ -1,26 +1,4 @@
-type mainTagIdentifier = 'developer' | 'mac' | 'hardware' | 'trending';
-type subTagIdentifier =
-  | 'iTerm'
-  | 'IDE'
-  | 'browser'
-  | 'widget'
-  | 'application'
-  | 'system'
-  | 'mouse'
-  | 'keyboard'
-  | 'monitor'
-  | 'laptop'
-  | 'headphone';
-
-interface mainTag {
-  identifier: mainTagIdentifier;
-  present: string;
-}
-
-interface subTag {
-  identifier: subTagIdentifier;
-  present: string;
-}
+import { mainTag, subTag } from '@/@types';
 
 interface sidebar {
   'main-tag': mainTag;

@@ -1,9 +1,9 @@
-export type mainTagIdentifier = 'developer' | 'mac' | 'hardware';
+export type mainTagIdentifier = 'developer' | 'mac' | 'hardware' | 'trending';
 
 export type subTagIdentifier =
   | 'iTerm'
   | 'IDE'
-  | 'Browser'
+  | 'browser'
   | 'widget'
   | 'application'
   | 'system'
