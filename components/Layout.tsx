@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import Sidebar from './Sidebar';
+import CustomFooter from './Footer';
 
 const { Header, Sider, Content, Footer } = Layout;
 
-export default function CustomLayout() {
+export default function CustomLayout({
+  header,
+  contents,
+}: {
+  header: React.ReactNode;
+  contents: React.ReactNode;
+}) {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   return (
     <Layout>
-      <Sider>
+      <Sider style={{ overflow: 'auto', height: 'calc(100vh - 16px)', background: colorBgContainer }}>
         <Sidebar />
       </Sider>
       <Layout className='site-layout'>
-        <Header style={{ textAlign: 'center', background: colorBgContainer }}>Header</Header>
+        <Header style={{ display: 'flex', alignItems: 'center', background: colorBgContainer }}>
+          {header}
+        </Header>
         <Content
           style={{
-            margin: '24px 16px',
-            padding: 24,
             minHeight: 280,
             background: colorBgContainer,
           }}
         >
-          Content
+          {contents}
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Footer</Footer>
+        <Footer>
+          <CustomFooter />
+        </Footer>
       </Layout>
     </Layout>
   );

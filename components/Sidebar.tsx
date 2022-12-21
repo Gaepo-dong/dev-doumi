@@ -21,19 +21,27 @@ const getItem = (
   } as MenuItem;
 };
 
-const items: MenuItem[] = sidebar.map((item, index) => {
-  return getItem(
-    item['main-tag'].present,
-    index + 1,
-    null,
-    item['sub-tags'].map((subItem, subIndex) => {
-      return getItem(subItem.present, `${index + 1}-${subIndex + 1}`);
-    }),
-  );
+const items: MenuItem[] = sidebar.map((item) => {
+  return item['sub-tags']
+    ? getItem(
+        item['main-tag'].present,
+        item['main-tag'].identifier,
+        null,
+        item['sub-tags'].map((subItem) => {
+          return getItem(subItem.present, `${item['main-tag'].identifier}-${subItem.identifier}`);
+        }),
+      )
+    : getItem(item['main-tag'].present, item['main-tag'].identifier);
 });
 
 export default function Sidebar() {
   return (
-    <Menu defaultSelectedKeys={['1-1']} defaultOpenKeys={['1']} mode='inline' theme='dark' items={items} />
+    <Menu
+      defaultSelectedKeys={['trending']}
+      defaultOpenKeys={sidebar.map((item) => item['main-tag'].identifier)}
+      mode='inline'
+      theme='light'
+      items={items}
+    />
   );
 }
