@@ -1,12 +1,12 @@
-const mediaQuery = (minWidth: number) => {
-  return `@media screen and (min-width: ${minWidth}px)`;
+const mediaQuery = (maxWidth: number) => {
+  return `@media screen and (max-width: ${maxWidth}px)`;
 };
 
 /**
  * Media queries
  * @author @Seojunhwan
  * @description
- * - mobile first media queries 입니다!
+ * - desktop first media queries 입니다!
  * - mobile_lg: 768px
  * - tablet: 1024px
  * - desktop: 1200px
@@ -25,6 +25,8 @@ export const media = {
   mobile_lg: mediaQuery(768),
   tablet: mediaQuery(1024),
   desktop: mediaQuery(1200),
+  desktop_slg: mediaQuery(1366),
   desktop_lg: mediaQuery(1440),
+  desktop_mlg: mediaQuery(1600),
   desktop_xlg: mediaQuery(1920),
 };

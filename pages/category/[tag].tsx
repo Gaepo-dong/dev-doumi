@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
+import Contents from '@/components/Contents';
 import CustomLayout from '@/components/CustomLayout';
-import { subTagIdentifier, translate } from '@/@types';
+import { subTagIdentifier, translate } from '@types';
 
 export default function Home() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <CustomLayout header={<Header title={translate[title]} />} contents={null} />
+        <CustomLayout header={<Header title={translate[title]} />} contents={<Contents />} />
       </main>
     </>
   );

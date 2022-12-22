@@ -4,7 +4,7 @@ import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { sidebar } from '@/data/sidebar';
-import { translate } from '@/@types';
+import { translate } from '@types';
 
 type MenuItem = Required<MenuProps>['items'][number];
 

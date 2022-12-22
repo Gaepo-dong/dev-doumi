@@ -18,7 +18,7 @@ export const sidebar: sidebar[] = [
     'sub-tags': ['widget', 'application', 'system'],
   },
   {
-    'main-tag': 'developer',
+    'main-tag': 'hardware',
     'sub-tags': ['mouse', 'monitor', 'keyboard', 'laptop', 'headphone'],
   },
 ];
