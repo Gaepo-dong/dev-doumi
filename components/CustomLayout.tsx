@@ -17,7 +17,7 @@ export default function CustomLayout({
   } = theme.useToken();
 
   return (
-    <Layout>
+    <Layout style={{ background: '#fff' }}>
       <Sider style={{ overflow: 'auto', height: 'calc(100vh - 16px)', background: colorBgContainer }}>
         <Sidebar />
       </Sider>

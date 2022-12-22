@@ -1,18 +1,36 @@
 import styled from '@emotion/styled';
 import CustomCard from './CustomCard';
 import { media } from '@/styles';
+import CustomPagination from './CustomPagination';
 
 export default function Contents() {
   return (
-    <CardsContainer>
-      <CustomCard />
-      <CustomCard />
-      <CustomCard />
-      <CustomCard />
-      <CustomCard />
-    </CardsContainer>
+    <ContentsContainer>
+      <CardsContainer>
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+      </CardsContainer>
+      <CustomPagination />
+    </ContentsContainer>
   );
 }
+
+const ContentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+`;
 
 const CardsContainer = styled.div`
   display: flex;
