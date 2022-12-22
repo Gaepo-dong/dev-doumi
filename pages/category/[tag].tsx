@@ -2,9 +2,11 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import CustomLayout from '@/components/CustomLayout';
+import { subTagIdentifier, translate } from '@/@types';
 
 export default function Home() {
   const router = useRouter();
+  const title = router.query.tag?.toString() as subTagIdentifier;
 
   return (
     <>
@@ -15,7 +17,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <CustomLayout header={<Header title={router.query.tag?.toString()} />} contents={null} />
+        <CustomLayout header={<Header title={translate[title]} />} contents={null} />
       </main>
     </>
   );

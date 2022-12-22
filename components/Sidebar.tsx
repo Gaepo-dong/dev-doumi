@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { sidebar } from '@/data/sidebar';
 import { MenuInfo } from 'rc-menu/lib/interface';
+import { sidebar } from '@/data/sidebar';
+import { translate } from '@/@types';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -26,14 +27,14 @@ const getItem = (
 const items: MenuItem[] = sidebar.map((item) => {
   return item['sub-tags']
     ? getItem(
-        item['main-tag'].present,
-        item['main-tag'].identifier,
+        translate[item['main-tag']],
+        item['main-tag'],
         null,
         item['sub-tags'].map((subItem) => {
-          return getItem(subItem.present, `${subItem.identifier}`);
+          return getItem(translate[subItem], `${subItem}`);
         }),
       )
-    : getItem(item['main-tag'].present, item['main-tag'].identifier);
+    : getItem(translate[item['main-tag']], item['main-tag']);
 });
 
 export default function Sidebar() {
@@ -49,7 +50,7 @@ export default function Sidebar() {
     return (
       <Menu
         defaultSelectedKeys={['trending']}
-        defaultOpenKeys={sidebar.map((item) => item['main-tag'].identifier)}
+        defaultOpenKeys={sidebar.map((item) => item['main-tag'])}
         onClick={(e) => onMenu(e)}
         mode='inline'
         theme='light'
@@ -57,12 +58,15 @@ export default function Sidebar() {
       />
     );
   }
+
   // loading
   if (!routerQuery) return null;
+
+  // done loading
   return (
     <Menu
       defaultSelectedKeys={[routerQuery]}
-      defaultOpenKeys={sidebar.map((item) => item['main-tag'].identifier)}
+      defaultOpenKeys={sidebar.map((item) => item['main-tag'])}
       onClick={(e) => onMenu(e)}
       mode='inline'
       theme='light'
