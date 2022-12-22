@@ -3,7 +3,8 @@ import { Pagination } from 'antd';
 
 export default function CustomPagination() {
   const [current, setCurrent] = React.useState(1);
-  const onPaginate = (page: number, pageSize?: number) => {
+
+  const onPaginate = (page: number) => {
     setCurrent(page);
   };
 

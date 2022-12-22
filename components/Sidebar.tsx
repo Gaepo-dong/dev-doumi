@@ -45,6 +45,19 @@ export default function Sidebar() {
     router.push(`/category/${e.key.toString()}`);
   };
 
+  // content
+  if (router.asPath.includes('/content/')) {
+    return (
+      <Menu
+        defaultOpenKeys={sidebar.map((item) => item['main-tag'])}
+        onClick={(e) => onMenu(e)}
+        mode='inline'
+        theme='light'
+        items={items}
+      />
+    );
+  }
+
   // root
   if (router.asPath === '/') {
     return (
