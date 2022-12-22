@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
-import Contents from '@/components/Contents';
+import Contents from '@/components/CardContents';
 import CustomLayout from '@/components/CustomLayout';
 import { subTagIdentifier, translate } from '@types';
 

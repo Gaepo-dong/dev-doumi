@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import CustomLayout from '@/components/CustomLayout';
+import Content from '@/components/Content';
 
 export default function Home() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <CustomLayout header={<Header title={title} />} contents={null} />
+        <CustomLayout header={<Header title={title} />} contents={<Content />} />
       </main>
     </>
   );

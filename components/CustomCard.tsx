@@ -10,7 +10,7 @@ export default function CustomCard() {
   const router = useRouter();
 
   const onContent = () => {
-    router.push(`/content/1`);
+    router.push(`/category/tag/1`);
   };
 
   return (
