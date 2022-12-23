@@ -39,7 +39,8 @@ const items: MenuItem[] = sidebar.map((item) => {
 
 export default function Sidebar() {
   const router = useRouter();
-  const routerQuery = router.query.tag?.toString();
+  const routerQuery =
+    router.query.tag?.toString() ?? (typeof router.query.slug === 'object' && router.query.slug[0]);
 
   const onMenu = (e: MenuInfo) => {
     router.push(`/category/${e.key.toString()}`);
