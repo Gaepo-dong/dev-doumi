@@ -1,11 +1,20 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import type { GetStaticProps } from 'next';
+import type { ParsedUrlQuery } from 'querystring';
+
 import Header from '@/components/Header';
 import Contents from '@/components/CardContents';
 import CustomLayout from '@/components/CustomLayout';
-import { subTagIdentifier, translate } from '@types';
+import { getItemByTag } from '@/utils/mdx';
+import { subTags } from '@/constants';
+import { Item, subTagIdentifier, translate } from '@types';
 
-export default function Home() {
+interface SubTagPageProps {
+  items: Item[];
+}
+
+export default function Tag({}: SubTagPageProps) {
   const router = useRouter();
   const title = router.query.tag?.toString() as subTagIdentifier;
 
@@ -23,3 +32,34 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticPaths = async () => {
+  const paths = Object.keys(translate).map((tag) => ({ params: { tag } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+interface GetStaticPropsContext extends ParsedUrlQuery {
+  tag: subTagIdentifier;
+}
+
+export const getStaticProps: GetStaticProps<{}, GetStaticPropsContext> = async (context) => {
+  if (!context.params) {
+    throw new Error('params is undefined');
+  }
+
+  const { tag } = context.params;
+  if (!subTags.includes(tag)) {
+    throw new Error(`invalid tag: ${tag}`);
+  }
+
+  const items = await getItemByTag(tag);
+  return {
+    props: {
+      items,
+    },
+  };
+};
