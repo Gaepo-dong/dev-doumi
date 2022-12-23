@@ -1,18 +1,15 @@
 import Head from 'next/head';
-import type { GetStaticProps } from 'next';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import Header from '@/components/Header';
 import CustomLayout from '@/components/CustomLayout';
-import { getPostsByTag } from '@/utils/mdx';
-import type { FrontMatter } from '@/@types';
+import { getItemByTag } from '@/utils/mdx';
+import type { Item } from '@/@types';
 
-interface PageProps {
-  data: FrontMatter;
-  mdxSource: MDXRemoteSerializeResult;
+interface Props {
+  items: Item[];
 }
 
-export default function Home({}: PageProps) {
+export default function Trending({}: Props) {
   return (
     <>
       <Head>
@@ -28,12 +25,16 @@ export default function Home({}: PageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await getPostsByTag('Browser');
+export const getStaticProps = async () => {
+  const items = getItemByTag('trending');
+
+  if (items instanceof Error) {
+    throw new Error('Error while fetching items');
+  }
 
   return {
     props: {
-      ...data,
+      items,
     },
   };
 };
