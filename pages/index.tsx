@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import Header from '@/components/Header';
 import CustomLayout from '@/components/CustomLayout';
-import { getItemByTag } from '@/utils/mdx';
+import { getAllItems } from '@/utils/mdx';
 import type { Item } from '@/@types';
 
 interface Props {
@@ -26,15 +26,20 @@ export default function Trending({}: Props) {
 }
 
 export const getStaticProps = async () => {
-  const items = getItemByTag('trending');
-
+  const items = await getAllItems();
   if (items instanceof Error) {
     throw new Error('Error while fetching items');
   }
 
+  const sortedItems = items.sort((a, b) => {
+    const aDate = new Date(a.data.createAt);
+    const bDate = new Date(b.data.createAt);
+    return bDate.getTime() - aDate.getTime();
+  });
+
   return {
     props: {
-      items,
+      sortedItems,
     },
   };
 };
